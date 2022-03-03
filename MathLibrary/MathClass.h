@@ -1,0 +1,65 @@
+#pragma once
+#include <iostream>
+#include "Struct.h"
+
+#ifdef MATHLIBRARY_EXPORTS
+#define MATHLIBRARY_API __declspec(dllexport)
+#else
+#define MATHLIBRARY_API __declspec(dllimport)
+#endif
+
+class MATHLIBRARY_API Calculate
+{
+public:
+	Calculate(float a=0.0, float b=0.0);
+	~Calculate();
+	float Multiplication(float a, float b);
+	float Division(float a, float b);
+	float LastResult();
+	Vector3f GetVector();
+	Vector3f* GetVectorPtr();
+	float Dot(Vector3f v1, Vector3f v2);
+	Vector3f Cross(Vector3f v1, Vector3f v2);
+private:
+	float num1 = 7.2f;
+	float num2 = 3.7f;
+	float result = 15.5;
+	Vector3f vec = Vector3f(0.0, 0.0, 0.0);
+};
+
+extern "C" MATHLIBRARY_API Calculate* CreateInstance() {
+	return new Calculate();
+}
+extern "C" MATHLIBRARY_API void DeleteInstance(Calculate * pShapeInstance) {
+	if (pShapeInstance != NULL) {
+		delete pShapeInstance;
+		pShapeInstance = NULL;
+	}
+}
+
+extern "C" MATHLIBRARY_API float Multiplication(Calculate * pShapeInstance, float a, float b) {
+	return pShapeInstance->Multiplication(a, b);
+}
+extern "C" MATHLIBRARY_API float Division(Calculate * pShapeInstance, float a, float b) {
+	return pShapeInstance->Division(a, b);
+}
+extern "C" MATHLIBRARY_API float LastResult(Calculate * pShapeInstance) {
+	return pShapeInstance->LastResult();
+}
+
+extern "C" MATHLIBRARY_API Vector3f GetVector(Calculate* pShapeInstance) {
+	return pShapeInstance->GetVector();
+}
+extern "C" MATHLIBRARY_API Vector3f* GetVectorPtr(Calculate* pShapeInstance) {
+	return pShapeInstance->GetVectorPtr();
+}
+extern "C" MATHLIBRARY_API float Dot(Calculate* pShapeInstance, Vector3f v1, Vector3f v2) {
+	return pShapeInstance->Dot(v1, v2);
+}
+extern "C" MATHLIBRARY_API Vector3f Cross(Calculate* pShapeInstance, Vector3f v1, Vector3f v2) {
+	return pShapeInstance->Cross(v1, v2);
+}
+
+extern "C" MATHLIBRARY_API void ArrayDataProcess(Calculate * pShapeInstance, ObjectCollection<Vector3f> data) {
+	
+}

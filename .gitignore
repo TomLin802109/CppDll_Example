@@ -1,0 +1,6 @@
+WpfAppTester/obj/
+x64/
+Release/
+Debug/
+.vs/
+MyDll_Csharp.VC.db
