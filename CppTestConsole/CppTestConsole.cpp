@@ -6,6 +6,7 @@
 #include <limits>
 #include <format>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -28,6 +29,10 @@ ostream& operator<<(ostream& os, Point3 p) {
     return os;
 }
 
+bool compZ(Point3 const& lhs, Point3 const& rhs) {
+    return lhs.Z < rhs.Z;
+}
+
 int main()
 {
     Point3 p1(1, 2, 3);
@@ -35,12 +40,21 @@ int main()
     cout << p2.ToString() << endl;
 
     int count = 3;
-    vector<Point3> vec(count);
+    vector<Point3> vec;
     for (int i = -3 * count; i < 3 * count; i += 3) {
         auto p = Point3(i, i + 1, i + 2);
         vec.push_back(p);
         cout << p << endl;
     }
+
+    auto func = [](const Point3& a, const Point3& b) {
+        return a.Z < b.Z;
+    };
+
+    auto max = std::max_element(vec.begin(), vec.end(), [](const Point3& a, const Point3& b) { return a.Z < b.Z; });
+    auto min = std::min_element(vec.begin(), vec.end(), [](const Point3& a, const Point3& b) { return a.Z < b.Z; });
+    cout << "max element: " << max->ToString() << endl;
+    cout << "min element: " << min->ToString() << endl;
     cout << "print by pointer" << endl;
     cout << "vec ptr: " << &vec << endl;
     for (int i = 0; i < vec.size(); i++) {
