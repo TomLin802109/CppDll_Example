@@ -103,4 +103,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>copy $(SolutionDir)\Debug\MathLibrary.dll $(TargetDir)</PreBuildEvent>
+  </PropertyGroup>
 </Project>

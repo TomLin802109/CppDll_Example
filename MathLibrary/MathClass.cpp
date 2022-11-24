@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "MathClass.h"
 
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
 Calculate::Calculate(float a, float b) {
 	this->num1 = a;
 	this->num2 = b;
@@ -40,3 +45,20 @@ Vector3f Calculate::Cross(Vector3f v1, Vector3f v2) {
 }
 
 
+void Calculate::SetArray(Vector3f* inAryPtr, int size) {
+	cout << "MSG from native dll:" << endl;
+	
+	for (int i = 0; i < size; i++) {
+		auto d = inAryPtr[i];
+		cout << d.ToString() << endl;
+	}
+}
+
+void Calculate::GetArray(int size, Vector3f* inAryPtr, int& outSize) {
+	outSize = size;
+	vector<Vector3f> vec;
+	for (int i = 0; i < size; i++) {
+		vec.push_back(Vector3f(i, i, i));
+	}
+	inAryPtr = &(vec[0]);
+}

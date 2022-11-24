@@ -18,6 +18,8 @@ namespace WpfAppTester
         [DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
         public static extern float Func2(IntPtr ptr, float a, float b);
 
+        
+
 
         //[DllImport(Native.DllName, CallingConvention = Native.CallingConvention)]
         //public static extern void RotateAnyAxis(vector3f vector, vector3f rotateAxis, double anglePi, out vector3f result);
